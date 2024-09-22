@@ -4,5 +4,5 @@ build:
     backend: ./pom_planner_be/Dockerfile  # Backend Dockerfile
 
 run:
-  web: yarn start --port $PORT  # Use dynamic port from Heroku
-  backend: bundle exec rails server -b 0.0.0.0 -p 5000  # Backend listens on port 5000
+  web: cd pom_planner_fe && bundle exec rails server -b 0.0.0.0 -p $PORT  # Frontend on dynamic port
+  backend: cd pom_planner_be && bundle exec rails server -b 0.0.0.0 -p 5000  # Backend on port 5000
