@@ -1,16 +1,16 @@
 build:
   docker:
     web:
-      dockerfile: ./pom_planner_fe/Dockerfile  # Correct path to the frontend Dockerfile
+      dockerfile: pom_planner_fe/Dockerfile  # Correct path to the frontend Dockerfile
     backend:
-      dockerfile: ./pom_planner_be/Dockerfile  # Correct path to the backend Dockerfile
+      dockerfile: pom_planner_be/Dockerfile  # Correct path to the backend Dockerfile
 
 run:
   web:
-    image: registry.heroku.com/pom-planner/web  # The image name for the web process
+    image: registry.heroku.com/pom-planner/web  # Correct image name for the frontend process
     command:
       - cd pom_planner_fe && bundle exec rails server -b 0.0.0.0 -p $PORT
   backend:
-    image: registry.heroku.com/pom-planner/backend  # The image name for the backend process
+    image: registry.heroku.com/pom-planner/backend  # Correct image name for the backend process
     command:
       - cd pom_planner_be && bundle exec rails server -b 0.0.0.0 -p 5000
