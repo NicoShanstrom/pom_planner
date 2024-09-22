@@ -1,9 +1,9 @@
 build:
   docker:
     web:
-      dockerfile: pom_planner_fe/Dockerfile  # Correct path to the frontend Dockerfile
+      dockerfile: ./pom_planner_fe/Dockerfile  # Correct path to the frontend Dockerfile
     backend:
-      dockerfile: pom_planner_be/Dockerfile  # Correct path to the backend Dockerfile
+      dockerfile: ./pom_planner_be/Dockerfile  # Correct path to the backend Dockerfile
 
 run:
   web:

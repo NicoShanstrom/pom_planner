@@ -1,4 +1,3 @@
-version: '3'
 services:
   backend:
     build: ./pom_planner_be  # Path to your backend Dockerfile
