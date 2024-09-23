@@ -1,26 +1,34 @@
 services:
   backend:
+    platform: linux/amd64
     build: ./pom_planner_be  # Path to your backend Dockerfile
     ports:
-      - "5000:5000"
+      - "5001:5000"
     depends_on:
       - db
     environment:
       - DATABASE_URL=${DATABASE_URL}
-      - RAILS_ENV=production
       - BE_RAILS_MASTER_KEY=${BE_RAILS_MASTER_KEY}
+      - RAILS_MASTER_KEY=${BE_RAILS_MASTER_KEY}
+      - GOOGLE_CLIENT_ID=${GOOGLE_CLIENT_ID}
+      - GOOGLE_CLIENT_SECRET=${GOOGLE_CLIENT_SECRET}
+      - RAILS_ENV=production
+    command: bundle exec rails server -b 0.0.0.0 -p 5000  # Set this to bind to the correct port
 
   frontend:
+    platform: linux/amd64
     build: ./pom_planner_fe  # Path to your frontend Dockerfile
     ports:
       - "3000:3000"
     depends_on:
       - backend
     environment:
-      - API_URL=http://backend:5000  # Adjust this depending on your API route
-      - RAILS_ENV=production
       - FE_RAILS_MASTER_KEY=${FE_RAILS_MASTER_KEY}
-
+      - RAILS_MASTER_KEY=${FE_RAILS_MASTER_KEY}
+      - SECRET_KEY_BASE=${SECRET_KEY_BASE}
+      - PORT=3000
+      - RAILS_ENV=production  # Explicitly setting for production
+    command: bundle exec rails server -b 0.0.0.0 -p $PORT  # Add this to explicitly set the command
   db:
     image: postgres:13
     environment:
